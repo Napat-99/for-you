@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Him to Her ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;500;700&family=Charm:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Mitr', sans-serif; }
+        .font-love { font-family: 'Charm', cursive; }
+
+        /* Animation: หัวใจเต้นแบบนุ่มนวล */
+        @keyframes softHeartbeat {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(255,182,193,0.5)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 30px rgba(255,20,147,0.8)); }
+        }
+        .premium-heart { animation: softHeartbeat 2s infinite ease-in-out; }
+
+        /* การ์ดเด้ง */
+        .card-pop {
+            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scale(0.5) translateY(200px) rotate(-5deg);
+            opacity: 0;
+            filter: blur(10px);
+        }
+        .card-pop.active {
+            transform: scale(1) translateY(0) rotate(0deg);
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        /* เอฟเฟกต์ละอองวิ้งๆ */
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkleAnim 3s linear infinite;
+        }
+        @keyframes sparkleAnim {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+
+        /* พื้นหลังขยับได้ */
+        .bg-animate {
+            background: linear-gradient(-45deg, #ffe4e6, #fecdd3, #fff1f2, #fae8ff);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-animate min-h-screen flex items-center justify-center overflow-hidden">
+
+    <div id="sparkle-container" class="fixed inset-0 pointer-events-none"></div>
+
+    <div id="envelope-wrapper" class="relative z-10 text-center">
+        <div onclick="openCard(event)" class="group cursor-pointer relative">
+            <div class="absolute inset-0 bg-pink-400 blur-[60px] opacity-30 group-hover:opacity-50 transition-opacity"></div>
+            
+            <div class="relative transform transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                <div class="text-[180px] leading-none filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.15)]">
+                    ✉️
+                </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-2 text-4xl animate-pulse">
+                    ❤️
+                </div>
+            </div>
+            
+            <p class="mt-8 text-pink-600 font-medium tracking-widest animate-pulse">
+                — CLICK TO OPEN —
+            </p>
+        </div>
+    </div>
+
+    <div id="card" class="card-pop hidden fixed inset-0 flex items-center justify-center p-6 z-50">
+        <div class="relative max-w-lg w-full">
+            <div class="absolute inset-0 bg-pink-200/50 rounded-[40px] blur-2xl translate-y-4"></div>
+            
+            <div class="relative bg-white/90 backdrop-blur-xl p-10 md:p-14 rounded-[40px] border border-white shadow-xl text-center">
+                
+                <button onclick="closeCard()" class="absolute top-6 right-6 text-gray-300 hover:text-pink-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <div class="relative flex justify-center items-center mb-10">
+                    <div class="relative">
+                        <div class="premium-heart text-8xl mb-2">❤️</div>
+                        <div class="text-8xl mt-[-20px] filter grayscale-[0.2]">🤲</div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h2 class="text-5xl font-bold text-gray-800">
+                        เธอ...
+                    </h2>
+                    
+                    <div class="space-y-3">
+                        <p class="text-gray-600 text-xl font-normal leading-relaxed">
+                        เธอคงเหนื่อยมาหลายวันเลยเนอะ <br>
+                            <span class="text-pink-500 font-medium italic">นี่คือกำลังใจจากเค้านะค้าบ</span>
+                        </p>
+                    </div>
+
+                    <div class="pt-6 flex justify-center">
+                        <div class="inline-flex items-center px-6 py-2 rounded-full bg-pink-50 border border-pink-100 shadow-sm">
+                            <span class="relative flex h-2 w-2 mr-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
+                            </span>
+                            <span class="text-pink-700 font-medium">เค้าอยู่ข้างเธอเสมอเลยนะ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // สร้างเอฟเฟกต์ละอองระยิบระยับพื้นหลัง
+        function createSparkles() {
+            const container = document.getElementById('sparkle-container');
+            for(let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                const size = Math.random() * 5 + 2;
+                sparkle.style.width = size + 'px';
+                sparkle.style.height = size + 'px';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(sparkle);
+            }
+        }
+        createSparkles();
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = ['❤️', '✨', '🌸', '💖'][Math.floor(Math.random() * 4)];
+            heart.style.position = 'fixed';
+            heart.style.left = '50%';
+            heart.style.top = '50%';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '100';
+            document.body.appendChild(heart);
+
+            const destinationX = (Math.random() - 0.5) * 500;
+            const destinationY = (Math.random() - 0.5) * 500;
+
+            heart.animate([
+                { transform: 'translate(-50%, -50%) scale(0)', opacity: 1 },
+                { transform: `translate(${destinationX}px, ${destinationY}px) scale(1.5)`, opacity: 0 }
+            ], {
+                duration: 2000,
+                easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)',
+                fill: 'forwards'
+            });
+
+            setTimeout(() => heart.remove(), 2000);
+        }
+
+        function openCard(e) {
+            const envelope = document.getElementById('envelope-wrapper');
+            const card = document.getElementById('card');
+            
+            // เอฟเฟกต์พุ่งกระจายตอนเปิด
+            for(let i=0; i<30; i++) {
+                setTimeout(createFloatingHeart, i * 30);
+            }
+
+            envelope.style.opacity = '0';
+            envelope.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                envelope.classList.add('hidden');
+                card.classList.remove('hidden');
+                setTimeout(() => card.classList.add('active'), 50);
+            }, 500);
+        }
+
+        function closeCard() {
+            const envelope = document.getElementById('envelope-wrapper');
+            const card = document.getElementById('card');
+            card.classList.remove('active');
+            setTimeout(() => {
+                card.classList.add('hidden');
+                envelope.classList.remove('hidden');
+                envelope.style.opacity = '1';
+                envelope.style.transform = 'scale(1)';
+            }, 800);
+        }
+    </script>
+</body>
+</html>
